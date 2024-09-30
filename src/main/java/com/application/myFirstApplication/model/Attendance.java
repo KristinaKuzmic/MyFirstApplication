@@ -1,27 +1,30 @@
 package com.application.myFirstApplication.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 
 @Entity
 public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private boolean memberAttendance;
-    private Course course;
+
+    @ManyToOne
+    @JoinColumn(name = "lesson_id")
     private Lesson lesson;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
 
     public Attendance() {
     }
 
-    public Attendance(int id, boolean memberAttendance, Course course, Lesson lesson, Member member) {
+    public Attendance(int id, boolean memberAttendance, Group group, Lesson lesson, Member member) {
         this.id = id;
         this.memberAttendance = memberAttendance;
-        this.course = course;
         this.lesson = lesson;
         this.member = member;
     }
@@ -42,13 +45,6 @@ public class Attendance {
         this.memberAttendance = memberAttendance;
     }
 
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
 
     public Lesson getLesson() {
         return lesson;

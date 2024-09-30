@@ -1,9 +1,8 @@
 package com.application.myFirstApplication.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Course {
@@ -12,13 +11,18 @@ public class Course {
     private int id;
     private String nameOfCourse;
 
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<Group> groups;
+
     public Course() {
     }
 
-    public Course(int id, String name) {
+    public Course(int id, String nameOfCourse, List<Group> groups) {
         this.id = id;
-        this.nameOfCourse = name;
+        this.nameOfCourse = nameOfCourse;
+        this.groups = groups;
     }
+
 
     public int getId() {
         return id;
@@ -28,11 +32,20 @@ public class Course {
         this.id = id;
     }
 
-    public String getName() {
+
+    public String getNameOfCourse() {
         return nameOfCourse;
     }
 
-    public void setName(String name) {
-        this.nameOfCourse = name;
+    public void setNameOfCourse(String nameOfCourse) {
+        this.nameOfCourse = nameOfCourse;
+    }
+
+    public List<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
     }
 }

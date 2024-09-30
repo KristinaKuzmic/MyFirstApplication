@@ -1,9 +1,8 @@
 package com.application.myFirstApplication.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Group {
@@ -13,20 +12,35 @@ public class Group {
     private String nameOfGroup;
     private int numberOfMembers;
     private int maxNumberOfMembers;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
     private Course course;
+
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
     private Professor professor;
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Lesson> lessons;
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    private List<Member> members;
 
     public Group() {
     }
 
-    public Group(int id, String nameOfGroup, int numberOfMembers, int maxNumberOfMembers, Course course, Professor professor) {
+    public Group(int id, String nameOfGroup, int numberOfMembers, int maxNumberOfMembers, Course course, Professor professor, List<Lesson> lessons, List<Member> members) {
         this.id = id;
         this.nameOfGroup = nameOfGroup;
         this.numberOfMembers = numberOfMembers;
         this.maxNumberOfMembers = maxNumberOfMembers;
         this.course = course;
         this.professor = professor;
+        this.lessons = lessons;
+        this.members = members;
     }
+
 
     public String getNameOfGroup() {
         return nameOfGroup;
@@ -74,5 +88,21 @@ public class Group {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
+    }
+
+    public List<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<Member> members) {
+        this.members = members;
     }
 }

@@ -1,33 +1,40 @@
 package com.application.myFirstApplication.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String firstName;
     private String lastName;
     private String jmbg;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
+
+    @Enumerated(EnumType.STRING)
     private Education education;
-    private Date startDay;
-    private Date endDay;
+
+    private LocalDate startDay;
+    private LocalDate endDay;
     private int numbersOfAttendance;
     private int getNumbersOfAbsences;
-    private Course course;
 
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Attendance> attendanceList;
 
     public Member() {
     }
 
-    public Member(int id, String firstName, String lastName, String jmbg, Date dateOfBirth, Education education, Date startDay, Date endDay, int numbersOfAttendance, int getNumbersOfAbsences, Course course) {
+    public Member(int id, String firstName, String lastName, String jmbg, LocalDate dateOfBirth, Education education, LocalDate startDay, LocalDate endDay, int numbersOfAttendance, int getNumbersOfAbsences, Group group, List<Attendance> attendanceList) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -38,7 +45,8 @@ public class Member {
         this.endDay = endDay;
         this.numbersOfAttendance = numbersOfAttendance;
         this.getNumbersOfAbsences = getNumbersOfAbsences;
-        this.course = course;
+        this.group = group;
+        this.attendanceList = attendanceList;
     }
 
     public int getId() {
@@ -73,11 +81,11 @@ public class Member {
         this.jmbg = jmbg;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -89,19 +97,19 @@ public class Member {
         this.education = education;
     }
 
-    public Date getStartDay() {
+    public LocalDate getStartDay() {
         return startDay;
     }
 
-    public void setStartDay(Date startDay) {
+    public void setStartDay(LocalDate startDay) {
         this.startDay = startDay;
     }
 
-    public Date getEndDay() {
+    public LocalDate getEndDay() {
         return endDay;
     }
 
-    public void setEndDay(Date endDay) {
+    public void setEndDay(LocalDate endDay) {
         this.endDay = endDay;
     }
 
@@ -121,11 +129,19 @@ public class Member {
         this.getNumbersOfAbsences = getNumbersOfAbsences;
     }
 
-    public Course getCourse() {
-        return course;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public List<Attendance> getAttendanceList() {
+        return attendanceList;
+    }
+
+    public void setAttendanceList(List<Attendance> attendanceList) {
+        this.attendanceList = attendanceList;
     }
 }

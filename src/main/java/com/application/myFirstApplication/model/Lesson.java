@@ -1,32 +1,48 @@
 package com.application.myFirstApplication.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.DayOfWeek;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
+
 
 @Entity
 public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Course course;
-    private Date dateOfLesson;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id", nullable = false)
+    private Group group;
+
+    private LocalDate dateOfLesson;
     private DayOfWeek dayOfWeek;
     private String timeOfLesson;
+
+    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
+    private List<Attendance> attendanceList;
+
 
     public Lesson() {
     }
 
-    public Lesson(int id, Course course, Date dateOfLesson, DayOfWeek dayOfWeek, String timeOfLesson) {
+    public Lesson(int id, Group group, LocalDate dateOfLesson, DayOfWeek dayOfWeek, String timeOfLesson, List<Attendance> attendanceList) {
         this.id = id;
-        this.course = course;
+        this.group = group;
         this.dateOfLesson = dateOfLesson;
         this.dayOfWeek = dayOfWeek;
         this.timeOfLesson = timeOfLesson;
+        this.attendanceList = attendanceList;
+    }
+
+    public List<Attendance> getAttendanceList() {
+        return attendanceList;
+    }
+
+    public void setAttendanceList(List<Attendance> attendanceList) {
+        this.attendanceList = attendanceList;
     }
 
     public int getId() {
@@ -37,19 +53,19 @@ public class Lesson {
         this.id = id;
     }
 
-    public Course getCourse() {
-        return course;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
-    public Date getDateOfLesson() {
+    public LocalDate getDateOfLesson() {
         return dateOfLesson;
     }
 
-    public void setDateOfLesson(Date dateOfLesson) {
+    public void setDateOfLesson(LocalDate dateOfLesson) {
         this.dateOfLesson = dateOfLesson;
     }
 

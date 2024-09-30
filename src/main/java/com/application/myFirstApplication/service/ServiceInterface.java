@@ -1,11 +1,13 @@
 package com.application.myFirstApplication.service;
 
 import com.application.myFirstApplication.model.Director;
-import com.application.myFirstApplication.model.Member;
+
+import java.util.List;
 
 public interface ServiceInterface {
 
     public Director getOneDirector();
-    public Member saveMember(Member member);
+
+
 
 }
