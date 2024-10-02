@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-public class Group {
+public class CourseGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -21,16 +21,16 @@ public class Group {
     @JoinColumn(name = "professor_id")
     private Professor professor;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "courseGroup", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Lesson> lessons;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "courseGroup", cascade = CascadeType.ALL)
     private List<Member> members;
 
-    public Group() {
+    public CourseGroup() {
     }
 
-    public Group(int id, String nameOfGroup, int numberOfMembers, int maxNumberOfMembers, Course course, Professor professor, List<Lesson> lessons, List<Member> members) {
+    public CourseGroup(int id, String nameOfGroup, int numberOfMembers, int maxNumberOfMembers, Course course, Professor professor, List<Lesson> lessons, List<Member> members) {
         this.id = id;
         this.nameOfGroup = nameOfGroup;
         this.numberOfMembers = numberOfMembers;

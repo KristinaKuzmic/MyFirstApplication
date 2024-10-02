@@ -12,15 +12,15 @@ public class Course {
     private String nameOfCourse;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    private List<Group> groups;
+    private List<CourseGroup> courseGroups;
 
     public Course() {
     }
 
-    public Course(int id, String nameOfCourse, List<Group> groups) {
+    public Course(int id, String nameOfCourse, List<CourseGroup> courseGroups) {
         this.id = id;
         this.nameOfCourse = nameOfCourse;
-        this.groups = groups;
+        this.courseGroups = courseGroups;
     }
 
 
@@ -41,11 +41,11 @@ public class Course {
         this.nameOfCourse = nameOfCourse;
     }
 
-    public List<Group> getGroups() {
-        return groups;
+    public List<CourseGroup> getGroups() {
+        return courseGroups;
     }
 
-    public void setGroups(List<Group> groups) {
-        this.groups = groups;
+    public void setGroups(List<CourseGroup> courseGroups) {
+        this.courseGroups = courseGroups;
     }
 }

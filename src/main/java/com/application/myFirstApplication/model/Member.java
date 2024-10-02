@@ -26,7 +26,7 @@ public class Member {
 
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private Group group;
+    private CourseGroup courseGroup;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Attendance> attendanceList;
@@ -34,7 +34,7 @@ public class Member {
     public Member() {
     }
 
-    public Member(int id, String firstName, String lastName, String jmbg, LocalDate dateOfBirth, Education education, LocalDate startDay, LocalDate endDay, int numbersOfAttendance, int getNumbersOfAbsences, Group group, List<Attendance> attendanceList) {
+    public Member(int id, String firstName, String lastName, String jmbg, LocalDate dateOfBirth, Education education, LocalDate startDay, LocalDate endDay, int numbersOfAttendance, int getNumbersOfAbsences, CourseGroup courseGroup, List<Attendance> attendanceList) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,7 +45,7 @@ public class Member {
         this.endDay = endDay;
         this.numbersOfAttendance = numbersOfAttendance;
         this.getNumbersOfAbsences = getNumbersOfAbsences;
-        this.group = group;
+        this.courseGroup = courseGroup;
         this.attendanceList = attendanceList;
     }
 
@@ -129,12 +129,12 @@ public class Member {
         this.getNumbersOfAbsences = getNumbersOfAbsences;
     }
 
-    public Group getGroup() {
-        return group;
+    public CourseGroup getGroup() {
+        return courseGroup;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroup(CourseGroup courseGroup) {
+        this.courseGroup = courseGroup;
     }
 
     public List<Attendance> getAttendanceList() {

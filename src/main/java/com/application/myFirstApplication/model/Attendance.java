@@ -22,7 +22,7 @@ public class Attendance {
     public Attendance() {
     }
 
-    public Attendance(int id, boolean memberAttendance, Group group, Lesson lesson, Member member) {
+    public Attendance(int id, boolean memberAttendance, CourseGroup courseGroup, Lesson lesson, Member member) {
         this.id = id;
         this.memberAttendance = memberAttendance;
         this.lesson = lesson;

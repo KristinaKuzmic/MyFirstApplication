@@ -15,7 +15,7 @@ public class Lesson {
 
     @ManyToOne
     @JoinColumn(name = "group_id", nullable = false)
-    private Group group;
+    private CourseGroup courseGroup;
 
     private LocalDate dateOfLesson;
     private DayOfWeek dayOfWeek;
@@ -28,9 +28,9 @@ public class Lesson {
     public Lesson() {
     }
 
-    public Lesson(int id, Group group, LocalDate dateOfLesson, DayOfWeek dayOfWeek, String timeOfLesson, List<Attendance> attendanceList) {
+    public Lesson(int id, CourseGroup courseGroup, LocalDate dateOfLesson, DayOfWeek dayOfWeek, String timeOfLesson, List<Attendance> attendanceList) {
         this.id = id;
-        this.group = group;
+        this.courseGroup = courseGroup;
         this.dateOfLesson = dateOfLesson;
         this.dayOfWeek = dayOfWeek;
         this.timeOfLesson = timeOfLesson;
@@ -53,12 +53,12 @@ public class Lesson {
         this.id = id;
     }
 
-    public Group getGroup() {
-        return group;
+    public CourseGroup getGroup() {
+        return courseGroup;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroup(CourseGroup courseGroup) {
+        this.courseGroup = courseGroup;
     }
 
     public LocalDate getDateOfLesson() {

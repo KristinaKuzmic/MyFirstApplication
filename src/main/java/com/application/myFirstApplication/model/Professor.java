@@ -20,12 +20,12 @@ public class Professor {
     private LocalDate endDay;
 
     @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
-    private List<Group> groups;
+    private List<CourseGroup> courseGroups;
 
     public Professor() {
     }
 
-    public Professor(int id, String firstName, String lastName, int yearsOfWork, LocalDate dateOfBirth, LocalDate startDay, LocalDate endDay, List<Group> groups) {
+    public Professor(int id, String firstName, String lastName, int yearsOfWork, LocalDate dateOfBirth, LocalDate startDay, LocalDate endDay, List<CourseGroup> courseGroups) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,7 +33,7 @@ public class Professor {
         this.dateOfBirth = dateOfBirth;
         this.startDay = startDay;
         this.endDay = endDay;
-        this.groups = groups;
+        this.courseGroups = courseGroups;
     }
 
     public int getId() {
@@ -92,11 +92,11 @@ public class Professor {
         this.endDay = endDay;
     }
 
-    public List<Group> getGroups() {
-        return groups;
+    public List<CourseGroup> getGroups() {
+        return courseGroups;
     }
 
-    public void setGroups(List<Group> groups) {
-        this.groups = groups;
+    public void setGroups(List<CourseGroup> courseGroups) {
+        this.courseGroups = courseGroups;
     }
 }
