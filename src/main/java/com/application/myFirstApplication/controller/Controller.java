@@ -17,9 +17,9 @@ public class Controller {
     private ServiceInterface serviceInterface;
 
     //director
-    @GetMapping("/login")
-    public Director getDirector() {
-        return null;
+    @GetMapping("/login/{email}")
+    public Director getDirector(@PathVariable String email) {
+        return serviceInterface.getOneDirector(email);
     }
 
     //member
@@ -81,4 +81,24 @@ public class Controller {
     public List<CourseGroup> getAllGroup(){
         return serviceInterface.getAllCourseGroup();
     }
+
+    //lesson
+
+    @PostMapping("/addLessons")
+    public String saveLessons(@RequestBody List<Lesson> lessons){
+        serviceInterface.addLessons(lessons);
+        return "Lessons are saved";
+    }
+
+    @PostMapping("/addLesson")
+    public String saveLesson(@RequestBody Lesson lesson){
+        serviceInterface.addLesson(lesson);
+        return "Lesson is saved";
+    }
+
+    @GetMapping("/getLessons")
+    public List<Lesson> getLessons(){
+        return  serviceInterface.getLessons();
+    }
+
 }

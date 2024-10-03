@@ -16,8 +16,8 @@ public class ServiceImpl implements ServiceInterface{
     private DirectorRepository directorRepository;
 
     @Override
-    public Director getOneDirector(){
-        return null;
+    public Director getOneDirector(String email){
+        return directorRepository.findByEmail(email);
     }
 
     //member
@@ -91,5 +91,25 @@ public class ServiceImpl implements ServiceInterface{
     @Override
     public List<CourseGroup> getAllCourseGroup() {
         return groupRepository.findAll();
+    }
+
+    //lesson
+
+    @Autowired
+    private LessonRepository lessonRepository;
+
+    @Override
+    public List<Lesson> addLessons(List<Lesson> lessons) {
+        return lessonRepository.saveAll(lessons);
+    }
+
+    @Override
+    public List<Lesson> getLessons() {
+        return lessonRepository.findAll();
+    }
+
+    @Override
+    public Lesson addLesson(Lesson lesson) {
+        return lessonRepository.save(lesson);
     }
 }

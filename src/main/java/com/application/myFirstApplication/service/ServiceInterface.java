@@ -7,7 +7,7 @@ import java.util.List;
 public interface ServiceInterface {
 
     //director
-    public Director getOneDirector();
+    public Director getOneDirector(String email);
 
     //member
     public Member addMember(Member member);
@@ -28,5 +28,10 @@ public interface ServiceInterface {
     //group
     public CourseGroup addGroup(CourseGroup courseGroup);
     public List<CourseGroup> getAllCourseGroup();
+
+    //lesson
+    public List<Lesson> addLessons(List<Lesson> lessons);
+    public List<Lesson> getLessons();
+    public Lesson addLesson(Lesson lesson);
 
 }
